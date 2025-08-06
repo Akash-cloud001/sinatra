@@ -8,7 +8,7 @@ const Hero = () => {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section ref={ref} className="min-h-screen hero-bg flex items-center justify-center relative pt-20">
+    <section ref={ref} className="min-h-screen hero-bg flex items-center justify-center relative pt-20 overflow-hidden">
       {/* Background overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20"></div>
       

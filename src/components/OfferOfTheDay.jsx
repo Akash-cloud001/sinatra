@@ -107,7 +107,7 @@ const OfferOfTheDay = () => {
   };
 
   return (
-    <section className="py-20 bg-black">
+    <section className="pb-10 bg-dark-bg">
       <div className="container">
         <motion.div 
           className="relative max-w-4xl mx-auto p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800"
@@ -118,7 +118,7 @@ const OfferOfTheDay = () => {
         >
           {/* Deal of the week tag */}
           <motion.div
-            className="inline-block px-4 py-2 rounded-full border border-amber-400/60 text-amber-400 text-sm font-medium mb-6"
+            className="inline-block px-4 py-2 rounded-full border border-amber-300/60 text-amber-400 text-xs font-medium mb-2"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -138,16 +138,14 @@ const OfferOfTheDay = () => {
               viewport={{ once: true }}
             >
               {/* Main Heading */}
-              <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">
+              <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-4 leading-tight">
                 Unlock the Best Prop Firm
-                <br />
-                Deals- Trade Smart, Save
-                <br />
+                Deals- Trade Smart, Save <br />
                 <span className="text-amber-400">Smarter</span>
               </h2>
 
               {/* Subtitle */}
-              <p className="text-gray-300 text-lg lg:text-xl mt-6">
+              <p className="text-gray-300 text-sm lg:text-base mt-4">
                 Code <span className="text-amber-400 font-semibold">"{activeCode.code || 'Loading...'}"</span> gives the highest discount available on <a href={activeCode.redirectUrl} target='_blank' className='text-amber-400 font-semibold'>ProFirm</a>
               </p>
             </motion.div>

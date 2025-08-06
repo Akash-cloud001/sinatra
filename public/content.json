@@ -1,4 +1,46 @@
 {
   "code": "ak10",
-  "redirectUrl": "https://akash-codes.in"
+  "redirectUrl": "https://akash-codes.in",
+  "mockFirms": [
+    {
+      "id": 1,
+      "name": "ProFirm",
+      "logo": "/images/logo.png",
+      "discount": "20% OFF",
+      "code": "ak10",
+      "url": "https://akash-codes.in",
+      "gradient": "from-blue-600 to-purple-600",
+      "description": "Premium prop trading platform with advanced features"
+    },
+    {
+      "id": 2,
+      "name": "TradeFirm",
+      "logo": "/images/logo.png",
+      "discount": "15% OFF",
+      "code": "TRADE15",
+      "url": "https://tradefirm.com",
+      "gradient": "from-green-500 to-teal-500",
+      "description": "Professional trading environment for serious traders"
+    },
+    {
+      "id": 3,
+      "name": "EliteFirm",
+      "logo": "/images/logo.png",
+      "discount": "25% OFF",
+      "code": "ELITE25",
+      "url": "https://elitefirm.com",
+      "gradient": "from-orange-500 to-red-500",
+      "description": "Elite trading platform with exclusive features"
+    },
+    {
+      "id": 4,
+      "name": "PrimeFirm",
+      "logo": "/images/logo.png",
+      "discount": "30% OFF",
+      "code": "PRIME30",
+      "url": "https://primefirm.com",
+      "gradient": "from-indigo-600 to-blue-600",
+      "description": "Prime trading experience with top-tier support"
+    }
+  ]
 }

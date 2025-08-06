@@ -6,6 +6,7 @@ import CourseStructure from './components/CourseStructure';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import ProFirms from './components/ProFirms';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <main>
         <Hero />
         <OfferOfTheDay />
+        <ProFirms />
         <CourseStructure />
         <FAQ />
         <FinalCTA />
