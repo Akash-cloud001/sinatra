@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { toast, ToastContainer } from 'react-toastify';
 
 // Animation variants for better control
 const containerVariants = {
@@ -108,6 +109,8 @@ const ProFirms = () => {
       document.body.removeChild(textArea);
       console.log('Code copied using fallback method');
     }
+    toast.success('Code copied successfully');
+
   };
 
   const handleClaimOffer = (url) => {
@@ -314,7 +317,7 @@ const ProFirms = () => {
                     </div>
                     <motion.button
                       onClick={() => handleCopyCode(firm.code, firm.name)}
-                      className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 shadow-sm shadow-black/10"
+                      className="cursor-pointer bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 shadow-sm shadow-black/10"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -355,6 +358,7 @@ const ProFirms = () => {
           ))}
         </motion.div>
       </div>
+      <ToastContainer />
     </section>
   );
 };

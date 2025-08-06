@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { toast, ToastContainer } from 'react-toastify';
 
 const OfferOfTheDay = () => {
   const [activeCode, setActiveCode] = useState({
@@ -75,7 +76,7 @@ const OfferOfTheDay = () => {
         // Add a small delay to ensure clipboard operation completes
         setTimeout(() => {
           window.location.href = activeCode.redirectUrl;
-        }, 100);
+        }, 500);
       } else {
         console.error('Failed to copy code');
         // Fallback: try to copy manually
@@ -88,7 +89,7 @@ const OfferOfTheDay = () => {
         console.log('Code copied using fallback method');
         setTimeout(() => {
           window.location.href = activeCode.redirectUrl;
-        }, 100);
+        }, 500);
       }
     } catch (error) {
       console.error('Error in handleCopyCode:', error);
@@ -100,10 +101,11 @@ const OfferOfTheDay = () => {
       document.execCommand('copy');
       document.body.removeChild(textArea);
       console.log('Code copied using fallback method');
-      setTimeout(() => {
+       setTimeout(() => {
         window.location.href = activeCode.redirectUrl;
-      }, 100);
+      }, 500);
     }
+    toast.success('Code copied successfully');
   };
 
   return (
@@ -299,6 +301,7 @@ const OfferOfTheDay = () => {
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-400/10 rounded-full blur-2xl"></div>
         </motion.div>
       </div>
+      <ToastContainer />
     </section>
   );
 };
