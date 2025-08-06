@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Logo from './svgs/Logo.jsx';
 
 const Navbar = () => {
@@ -82,7 +83,9 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Logo width={48} height={48} />
+          <Link to="/">
+            <Logo width={48} height={48} />
+          </Link>
         </motion.div>
 
         {/* Desktop Navigation */}
@@ -92,30 +95,23 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <motion.a 
-            href="#coupons" 
-            className="nav-link text-white hover:text-primary-green transition-colors"
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Coupons
-          </motion.a>
-          <motion.a 
-            href="#features" 
-            className="nav-link text-white hover:text-primary-green transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Features
-          </motion.a>
-          <motion.button 
-            className="btn-outline py-2 px-5 font-medium text-white/80"
-            whileHover={{ scale: 1.05, color:'#fff' }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <img src="/svgs/receipt.svg" alt="Coupon" className="w-5 h-5" />
-            Profirm Coupan
-          </motion.button>
+            <button 
+              onClick={() => {
+                const proFirmsSection = document.getElementById('pro-firms');
+                if (proFirmsSection) {
+                  proFirmsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="btn-outline py-2 px-5 font-medium text-white/80 hover:text-white transition-colors flex items-center gap-2"
+            >
+              <img src="/svgs/receipt.svg" alt="Coupon" className="w-5 h-5" />
+              Profirm Coupan
+            </button>
+          </motion.div>
         </motion.div>
 
         {/* Mobile Menu Button */}
@@ -179,8 +175,8 @@ const Navbar = () => {
                 >
                   Features
                 </motion.a>
-                <motion.button
-                  className="btn-outline py-3 px-6 font-medium text-white/80 w-full justify-center"
+                <motion.div
+                  className="w-full"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: 0.3 }}
@@ -188,9 +184,20 @@ const Navbar = () => {
                   whileTap={{ scale: 0.98 }}
                   onClick={handleMenuClick}
                 >
-                  <img src="/svgs/receipt.svg" alt="Coupon" className="w-5 h-5" />
-                  Profirm Coupan
-                </motion.button>
+                  <button
+                    onClick={() => {
+                      const proFirmsSection = document.getElementById('pro-firms');
+                      if (proFirmsSection) {
+                        proFirmsSection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="btn-outline py-3 px-6 font-medium text-white/80 w-full justify-center flex items-center gap-2"
+                  >
+                    <img src="/svgs/receipt.svg" alt="Coupon" className="w-5 h-5" />
+                    Profirm Coupan
+                  </button>
+                </motion.div>
               </div>
             </div>
           </motion.div>

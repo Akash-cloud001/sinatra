@@ -128,7 +128,7 @@ const ProFirms = () => {
   }
 
   return (
-    <section className="py-20 bg-dark-bg">
+    <section id="pro-firms" className="py-20 bg-dark-bg">
       <div className="container">
         {/* Section Header */}
         <motion.div 

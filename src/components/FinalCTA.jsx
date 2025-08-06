@@ -67,11 +67,11 @@ const FinalCTA = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-6"
           >
             {/* Header */}
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-amber-400 mb-6">
+              <h2 className="text-4xl lg:text-5xl font-bold text-amber-400 mb-3">
                 Join the Future of Trading
               </h2>
               <p className="text-white/80 text-lg leading-relaxed">
