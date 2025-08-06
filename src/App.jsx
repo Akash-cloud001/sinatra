@@ -16,8 +16,8 @@ function App() {
         <Hero />
         <OfferOfTheDay />
         <ProFirms />
-        <CourseStructure />
-        <FAQ />
+        {/* <CourseStructure />
+        <FAQ /> */}
         <FinalCTA />
       </main>
       <Footer />
