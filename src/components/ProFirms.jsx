@@ -128,8 +128,68 @@ const ProFirms = () => {
   }
 
   return (
-    <section id="pro-firms" className="py-20 bg-dark-bg">
-      <div className="container">
+    <section id="pro-firms" className="py-20 bg-dark-bg relative overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Gradient Orbs */}
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary-green/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-24 h-24 bg-amber-400/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-blue-400/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        
+        {/* Floating Particles */}
+        <motion.div
+          animate={{ 
+            y: [-20, 20, -20],
+            x: [-10, 10, -10],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ 
+            duration: 8, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          className="absolute top-32 right-32 w-2 h-2 bg-primary-green/60 rounded-full"
+        ></motion.div>
+        
+        <motion.div
+          animate={{ 
+            y: [20, -20, 20],
+            x: [10, -10, 10],
+            rotate: [360, 180, 0]
+          }}
+          transition={{ 
+            duration: 10, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          className="absolute bottom-32 left-32 w-1.5 h-1.5 bg-amber-400/60 rounded-full"
+        ></motion.div>
+        
+        <motion.div
+          animate={{ 
+            y: [-15, 15, -15],
+            x: [-5, 5, -5],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ 
+            duration: 6, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          className="absolute top-1/3 left-1/3 w-1 h-1 bg-blue-400/60 rounded-full"
+        ></motion.div>
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)`,
+            backgroundSize: '50px 50px'
+          }}></div>
+        </div>
+      
+      </div>
+
+      <div className="container relative z-10">
         {/* Section Header */}
         <motion.div 
           className="text-center mb-16"
@@ -144,6 +204,15 @@ const ProFirms = () => {
           <p className="text-white/80 max-w-2xl mx-auto text-lg">
             Discover the best prop trading firms with exclusive discount codes
           </p>
+          
+          {/* Decorative Line */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="w-24 h-0.5 bg-gradient-to-r from-transparent via-primary-green to-transparent mx-auto mt-6"
+          ></motion.div>
         </motion.div>
 
         {/* Firms Grid */}
@@ -164,6 +233,27 @@ const ProFirms = () => {
               variants={cardVariants}
               className="relative overflow-hidden rounded-2xl px-6 py-6 bg-gradient-to-br from-gray-900 to-black border border-gray-800 shadow-lg shadow-black/20 transition-all duration-300"
             >
+              {/* Card Decorative Elements */}
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary-green/10 to-transparent rounded-full blur-xl"></div>
+              <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-amber-400/10 to-transparent rounded-full blur-lg"></div>
+              
+              {/* Animated Border */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl"
+                style={{
+                  background: 'linear-gradient(45deg, transparent, rgba(0,255,136,0.1), transparent)',
+                  backgroundSize: '200% 200%'
+                }}
+                animate={{
+                  backgroundPosition: ['0% 0%', '100% 100%', '0% 0%']
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              ></motion.div>
+              
               {/* Background Pattern */}
               <div className="absolute inset-0 bg-black/10"></div>
               
@@ -171,7 +261,7 @@ const ProFirms = () => {
               <div className="relative z-10">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-4 w-full">
-                  <div className="flex flex-col items-start justify-center gap-6 w-full">
+                  <div className="flex flex-col items-start justify-center gap-6 w-full overflow-hidden">
                     {/* Firm Logo */}
                     <motion.div 
                       className='w-full flex items-center justify-center'
@@ -197,9 +287,10 @@ const ProFirms = () => {
                         ease: [0.215, 0.61, 0.355, 1]
                       }}
                       viewport={{ once: true }}
+                      className='w-full'
                     >
-                      <h3 className="text-amber-400 font-bold text-lg">{firm.name}</h3>
-                      <p className="text-white/80 text-xs truncate">{firm.description}</p>
+                      <h3 className="text-amber-400 font-bold text-xl">{firm.name}</h3>
+                      <p className="text-white/80 text-sm truncate">{firm.description}</p>
                     </motion.div>
                   </div>
                 </div>
@@ -246,7 +337,7 @@ const ProFirms = () => {
                 >
                   <motion.button
                     onClick={() => handleClaimOffer(firm.url)}
-                    className="flex-1 btn-primary group-hover:-translate-y-0.5 group-hover:shadow-[0_8px_25px_rgba(0,255,136,0.4)] px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-md shadow-black/15 items-center justify-center"
+                    className="flex-1 btn-primary px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-md shadow-black/15 items-center justify-center gap-2 hover:shadow-lg hover:shadow-black/25"
                     whileTap={{ scale: 0.98 }}
                   >
                     Claim Offer

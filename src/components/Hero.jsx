@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <section ref={ref} className="min-h-screen hero-bg flex items-center justify-center relative pt-20 overflow-hidden">
       {/* Background overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/20"></div>
+      <div className="absolute inset-0 bg-dark-bg/50"></div>
       
       <div className="container relative z-10">
         <div className="flex flex-col items-center justify-center text-center space-y-12">

@@ -90,7 +90,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <motion.div 
-          className="hidden md:flex items-center space-x-8"
+          className="flex items-center space-x-8"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -115,7 +115,7 @@ const Navbar = () => {
         </motion.div>
 
         {/* Mobile Menu Button */}
-        <motion.button
+        {/* <motion.button
           className="md:hidden flex flex-col space-y-1 p-2 hamburger-button"
           onClick={handleHamburgerClick}
           whileHover={{ scale: 1.05 }}
@@ -139,11 +139,11 @@ const Navbar = () => {
               isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
             }`}
           />
-        </motion.button>
+        </motion.button> */}
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             className="md:hidden mobile-menu absolute top-full left-0 right-0 z-40"
@@ -202,7 +202,7 @@ const Navbar = () => {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </nav>
   );
 };
