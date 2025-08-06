@@ -161,12 +161,11 @@ const OfferOfTheDay = () => {
               <motion.button
                 className={`px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-3 transition-all duration-300 border  cursor-pointer ${
                   isLoading || !activeCode
-                    ? 'bg-gray-600 text-gray-400 border-gray-600 cursor-not-allowed'
-                    : 'bg-gray-800 hover:bg-gray-700 text-white border-gray-700 hover:border-gray-600'
+                    ? 'bg-primary-green/60'
+                    : 'btn-primary'
                 }`}
                 onClick={handleCopyCode}
                 disabled={isLoading || !activeCode}
-                whileHover={!isLoading && activeCode ? { scale: 1.05, y: -2 } : {}}
                 whileTap={!isLoading && activeCode ? { scale: 0.95 } : {}}
               >
                 <span>

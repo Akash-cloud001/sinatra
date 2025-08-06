@@ -199,7 +199,7 @@ const ProFirms = () => {
                       viewport={{ once: true }}
                     >
                       <h3 className="text-amber-400 font-bold text-lg">{firm.name}</h3>
-                      <p className="text-white/80 text-xs">{firm.description}</p>
+                      <p className="text-white/80 text-xs truncate">{firm.description}</p>
                     </motion.div>
                   </div>
                 </div>
@@ -234,7 +234,7 @@ const ProFirms = () => {
 
                 {/* Action Buttons */}
                 <motion.div 
-                  className="flex gap-3"
+                  className="flex gap-3 group"
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ 
@@ -246,11 +246,13 @@ const ProFirms = () => {
                 >
                   <motion.button
                     onClick={() => handleClaimOffer(firm.url)}
-                    className="flex-1 bg-gray-800 hover:bg-gray-700 border-gray-700 hover:border-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-md shadow-black/15"
-                    whileHover={{ scale: 1.02 }}
+                    className="flex-1 btn-primary group-hover:-translate-y-0.5 group-hover:shadow-[0_8px_25px_rgba(0,255,136,0.4)] px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-md shadow-black/15 items-center justify-center"
                     whileTap={{ scale: 0.98 }}
                   >
                     Claim Offer
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </motion.button>
                 </motion.div>
               </div>
