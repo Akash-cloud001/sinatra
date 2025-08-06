@@ -25,7 +25,7 @@ const FinalCTA = () => {
                 className="w-full h-full object-contain"
               />
               {/* Overlay */}
-              <div className="absolute inset-0 bg-black/40"></div>
+              {/* <div className="absolute inset-0 bg-black/40"></div> */}
               
               {/* Decorative Elements */}
               <div className="absolute top-8 left-8 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
