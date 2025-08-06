@@ -82,7 +82,7 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Logo width={48} height={48} showGlow={true} />
+          <Logo width={48} height={48} />
         </motion.div>
 
         {/* Desktop Navigation */}

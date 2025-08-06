@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import CourseBenefits from './components/CourseBenefits';
+import OfferOfTheDay from './components/OfferOfTheDay';
 import CourseStructure from './components/CourseStructure';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
@@ -13,7 +13,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <CourseBenefits />
+        <OfferOfTheDay />
         <CourseStructure />
         <FAQ />
         <FinalCTA />
