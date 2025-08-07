@@ -14,10 +14,8 @@ const OfferOfTheDay = () => {
   const copyDiscountCode = async (code) => {
     try {
       await navigator.clipboard.writeText(code);
-      console.log('Code copied to clipboard:', code);
       return true;
     } catch (error) {
-      console.error('Failed to copy code:', error);
       return false;
     }
   };
@@ -27,7 +25,6 @@ const OfferOfTheDay = () => {
       try {
         setIsLoading(true);
         setError(null);
-        console.log('Fetching discount code from content.json...');
         
         const response = await fetch('/content.json');
         
@@ -36,16 +33,13 @@ const OfferOfTheDay = () => {
         }
         
         const data = await response.json();
-        console.log('Fetched data:', data);
         
         if (data.code) {
           setActiveCode(data);
-          console.log('Code set to:', data);
         } else {
           throw new Error('No code found in response');
         }
       } catch (err) {
-        console.error('Error fetching discount code:', err);
         setError('Failed to load discount code');
         // Set fallback code
         // setActiveCode({
@@ -62,23 +56,18 @@ const OfferOfTheDay = () => {
 
   const handleCopyCode = async () => {
     if (!activeCode || isLoading) {
-      console.log('Cannot copy: code not loaded or still loading');
       return;
     }
 
-    console.log('activeCode', activeCode);
     try {
-      console.log('Attempting to copy code:', activeCode);
       const success = await copyDiscountCode(activeCode);
       
       if (success) {
-        console.log('Code copied successfully, redirecting...');
         // Add a small delay to ensure clipboard operation completes
         setTimeout(() => {
           window.location.href = activeCode.redirectUrl;
         }, 500);
       } else {
-        console.error('Failed to copy code');
         // Fallback: try to copy manually
         const textArea = document.createElement('textarea');
         textArea.value = activeCode;
@@ -86,13 +75,11 @@ const OfferOfTheDay = () => {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        console.log('Code copied using fallback method');
         setTimeout(() => {
           window.location.href = activeCode.redirectUrl;
         }, 500);
       }
     } catch (error) {
-      console.error('Error in handleCopyCode:', error);
       // Fallback: try to copy manually
       const textArea = document.createElement('textarea');
       textArea.value = activeCode;
@@ -100,7 +87,6 @@ const OfferOfTheDay = () => {
       textArea.select();
       document.execCommand('copy');
       document.body.removeChild(textArea);
-      console.log('Code copied using fallback method');
        setTimeout(() => {
         window.location.href = activeCode.redirectUrl;
       }, 500);

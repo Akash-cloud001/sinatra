@@ -73,7 +73,7 @@ const Hero = () => {
             </motion.div>
             
             {/* Social Buttons */}
-            <motion.div 
+            {/* <motion.div 
               className="flex items-center space-x-6"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -95,6 +95,37 @@ const Hero = () => {
                 <img src="/svgs/twitter.svg" alt="Twitter" className="w-5 h-5" />
                 Twitter
               </motion.button>
+            </motion.div> */}
+            <motion.div 
+              className="flex items-center space-x-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <motion.a 
+                href="https://www.youtube.com/"
+                target='_blank'
+                className="btn-outline py-3 px-8 flex items-center gap-3 relative overflow-hidden group"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <img src="/svgs/youtube.svg" alt="YouTube" className="w-5 h-5 relative z-10" />
+                <span className="relative z-10">Youtube</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </motion.a>
+              
+              <motion.a 
+                href="https://x.com/"
+                target='_blank'
+                className="btn-outline py-3 px-8 flex items-center gap-3 relative overflow-hidden group"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <img src="/svgs/twitter.svg" alt="Twitter" className="w-5 h-5 relative z-10" />
+                <span className="relative z-10">Twitter</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </motion.a>
             </motion.div>
           </div>
         </div>

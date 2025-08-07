@@ -122,9 +122,14 @@ const ProFirms = () => {
     <section id="pro-firms" className="py-20 bg-dark-bg relative overflow-hidden">
       {/* Simplified Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Reduced gradient orbs */}
-        <div className="absolute top-20 left-10 w-24 h-24 bg-primary-green/5 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-20 right-10 w-16 h-16 bg-amber-400/5 rounded-full blur-xl"></div>
+        {/* Performance-friendly gradient orbs with CSS animations */}
+        <div className="absolute top-20 left-10 w-24 h-24 bg-primary-green/5 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-16 h-16 bg-amber-400/5 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/4 w-12 h-12 bg-blue-400/5 rounded-full blur-lg animate-pulse" style={{ animationDelay: '2s' }}></div>
+        
+        {/* Optimized geometric patterns */}
+        <div className="absolute top-1/3 right-1/4 w-32 h-32 border border-primary-green/10 rounded-full"></div>
+        <div className="absolute bottom-1/3 left-1/4 w-24 h-24 border border-amber-400/10 rounded-full"></div>
         
         {/* Simplified grid pattern */}
         <div className="absolute inset-0 opacity-3">
@@ -221,7 +226,7 @@ const ProFirms = () => {
 
                 {/* Code Display */}
                 <motion.div 
-                  className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-6 shadow-md shadow-black/10"
+                  className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-6 shadow-md shadow-black/10 border border-white/5"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ 
@@ -237,7 +242,7 @@ const ProFirms = () => {
                     </div>
                     <motion.button
                       onClick={() => handleCopyCode(firm.code, firm.name)}
-                      className="cursor-pointer bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 shadow-sm shadow-black/10"
+                      className="cursor-pointer bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 shadow-sm shadow-black/10 hover:shadow-md"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -259,11 +264,11 @@ const ProFirms = () => {
                 >
                   <motion.button
                     onClick={() => handleClaimOffer(firm.url)}
-                    className="flex-1 btn-primary px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-md shadow-black/15 items-center justify-center gap-2 hover:shadow-lg hover:shadow-black/25"
+                    className="flex-1 btn-primary px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-md shadow-black/15 items-center justify-center gap-2 hover:shadow-lg hover:shadow-black/25 relative overflow-hidden"
                     whileTap={{ scale: 0.98 }}
                   >
-                    Claim Offer
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span className="relative z-10">Claim Offer</span>
+                    <svg className="w-4 h-4 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </motion.button>
