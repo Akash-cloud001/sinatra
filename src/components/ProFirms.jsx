@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { toast, ToastContainer } from 'react-toastify';
 
-// Animation variants for better control
+// Simplified animation variants for better performance
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      staggerChildren: 0.05, // Reduced stagger time
+      delayChildren: 0.1, // Reduced delay
     },
   },
 };
@@ -17,16 +17,16 @@ const containerVariants = {
 const cardVariants = {
   hidden: {
     opacity: 0,
-    y: 30,
-    scale: 0.95,
+    y: 20, // Reduced movement
+    scale: 0.98, // Reduced scale change
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.6,
-      ease: [0.215, 0.61, 0.355, 1], // easeOutCubic for smooth motion
+      duration: 0.4, // Reduced duration
+      ease: "easeOut", // Simplified easing
     },
   },
 };
@@ -35,23 +35,24 @@ const ProFirms = () => {
   const [firms, setFirms] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Copy discount code to clipboard function
-  const copyDiscountCode = async (code) => {
+  // Memoized copy function to prevent unnecessary re-renders
+  const copyDiscountCode = useCallback(async (code) => {
     try {
       await navigator.clipboard.writeText(code);
-      console.log('Code copied to clipboard:', code);
       return true;
     } catch (error) {
       console.error('Failed to copy code:', error);
       return false;
     }
-  };
+  }, []);
+
+  // Memoized firms data to prevent unnecessary re-renders
+  const memoizedFirms = useMemo(() => firms, [firms]);
 
   useEffect(() => {
     const fetchFirms = async () => {
       try {
         setIsLoading(true);
-        console.log('Fetching firms data...');
         
         const response = await fetch('/content.json');
         
@@ -60,16 +61,11 @@ const ProFirms = () => {
         }
         
         const data = await response.json();
-        console.log('Fetched firms data:', data);
-        
-        // Mock firms data - you can replace this with actual API data
-        const mockFirms = data.mockFirms || []
-          
+        const mockFirms = data.mockFirms || [];
         
         setFirms(mockFirms);
       } catch (err) {
         console.error('Error fetching firms:', err);
-        // Set fallback data
         setFirms([]);
       } finally {
         setIsLoading(false);
@@ -79,16 +75,11 @@ const ProFirms = () => {
     fetchFirms();
   }, []);
 
-  const handleCopyCode = async (code, firmName) => {
+  const handleCopyCode = useCallback(async (code, firmName) => {
     try {
-      console.log('Attempting to copy code:', code);
       const success = await copyDiscountCode(code);
       
-      if (success) {
-        console.log(`Code ${code} copied successfully for ${firmName}`);
-        // You can add a toast notification here
-      } else {
-        console.error('Failed to copy code');
+      if (!success) {
         // Fallback: try to copy manually
         const textArea = document.createElement('textarea');
         textArea.value = code;
@@ -96,7 +87,6 @@ const ProFirms = () => {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        console.log('Code copied using fallback method');
       }
     } catch (error) {
       console.error('Error in handleCopyCode:', error);
@@ -107,15 +97,13 @@ const ProFirms = () => {
       textArea.select();
       document.execCommand('copy');
       document.body.removeChild(textArea);
-      console.log('Code copied using fallback method');
     }
     toast.success('Code copied successfully');
+  }, [copyDiscountCode]);
 
-  };
-
-  const handleClaimOffer = (url) => {
+  const handleClaimOffer = useCallback((url) => {
     window.open(url, '_blank');
-  };
+  }, []);
 
   if (isLoading) {
     return (
@@ -132,73 +120,28 @@ const ProFirms = () => {
 
   return (
     <section id="pro-firms" className="py-20 bg-dark-bg relative overflow-hidden">
-      {/* Background Decorative Elements */}
+      {/* Simplified Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Gradient Orbs */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary-green/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-24 h-24 bg-amber-400/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-blue-400/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        {/* Reduced gradient orbs */}
+        <div className="absolute top-20 left-10 w-24 h-24 bg-primary-green/5 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-20 right-10 w-16 h-16 bg-amber-400/5 rounded-full blur-xl"></div>
         
-        {/* Floating Particles */}
-        <motion.div
-          animate={{ 
-            y: [-20, 20, -20],
-            x: [-10, 10, -10],
-            rotate: [0, 180, 360]
-          }}
-          transition={{ 
-            duration: 8, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
-          className="absolute top-32 right-32 w-2 h-2 bg-primary-green/60 rounded-full"
-        ></motion.div>
-        
-        <motion.div
-          animate={{ 
-            y: [20, -20, 20],
-            x: [10, -10, 10],
-            rotate: [360, 180, 0]
-          }}
-          transition={{ 
-            duration: 10, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
-          className="absolute bottom-32 left-32 w-1.5 h-1.5 bg-amber-400/60 rounded-full"
-        ></motion.div>
-        
-        <motion.div
-          animate={{ 
-            y: [-15, 15, -15],
-            x: [-5, 5, -5],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ 
-            duration: 6, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
-          className="absolute top-1/3 left-1/3 w-1 h-1 bg-blue-400/60 rounded-full"
-        ></motion.div>
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 opacity-5">
+        {/* Simplified grid pattern */}
+        <div className="absolute inset-0 opacity-3">
           <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)`,
-            backgroundSize: '50px 50px'
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0)`,
+            backgroundSize: '100px 100px'
           }}></div>
         </div>
-      
       </div>
 
       <div className="container relative z-10">
         {/* Section Header */}
         <motion.div 
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
           viewport={{ once: true }}
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -208,11 +151,11 @@ const ProFirms = () => {
             Discover the best prop trading firms with exclusive discount codes
           </p>
           
-          {/* Decorative Line */}
+          {/* Simplified decorative line */}
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
             className="w-24 h-0.5 bg-gradient-to-r from-transparent via-primary-green to-transparent mx-auto mt-6"
           ></motion.div>
@@ -230,35 +173,15 @@ const ProFirms = () => {
             margin: "-50px",
           }}
         >
-          {firms.map((firm, index) => (
+          {memoizedFirms.map((firm, index) => (
             <motion.div
               key={firm.id}
               variants={cardVariants}
-              className="relative overflow-hidden rounded-2xl px-6 py-6 bg-gradient-to-br from-gray-900 to-black border border-gray-800 shadow-lg shadow-black/20 transition-all duration-300"
+              className="relative overflow-hidden rounded-2xl px-6 py-6 bg-gradient-to-br from-gray-900 to-black border border-gray-800 shadow-lg shadow-black/20 transition-all duration-300 hover:shadow-xl hover:shadow-black/30"
             >
-              {/* Card Decorative Elements */}
-              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary-green/10 to-transparent rounded-full blur-xl"></div>
-              <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-amber-400/10 to-transparent rounded-full blur-lg"></div>
-              
-              {/* Animated Border */}
-              <motion.div
-                className="absolute inset-0 rounded-2xl"
-                style={{
-                  background: 'linear-gradient(45deg, transparent, rgba(0,255,136,0.1), transparent)',
-                  backgroundSize: '200% 200%'
-                }}
-                animate={{
-                  backgroundPosition: ['0% 0%', '100% 100%', '0% 0%']
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              ></motion.div>
-              
-              {/* Background Pattern */}
-              <div className="absolute inset-0 bg-black/10"></div>
+              {/* Simplified decorative elements */}
+              <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-primary-green/5 to-transparent rounded-full blur-lg"></div>
+              <div className="absolute bottom-0 left-0 w-12 h-12 bg-gradient-to-tr from-amber-400/5 to-transparent rounded-full blur-md"></div>
               
               {/* Content */}
               <div className="relative z-10">
@@ -268,26 +191,24 @@ const ProFirms = () => {
                     {/* Firm Logo */}
                     <motion.div 
                       className='w-full flex items-center justify-center'
-                      initial={{ opacity: 0, scale: 0.8 }}
+                      initial={{ opacity: 0, scale: 0.9 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       transition={{ 
                         delay: 0.1, 
-                        duration: 0.4,
-                        ease: [0.215, 0.61, 0.355, 1]
+                        duration: 0.3,
                       }}
                       viewport={{ once: true }}
                     >
-                      <img src={firm.logo} alt={firm.name} className="w-20 h-20 object-contain aspect-auto" />
+                      <img src={firm.logo} alt={firm.name} className="w-20 h-20 object-contain aspect-auto" loading="lazy" />
                     </motion.div>
                     
                     {/* Firm Info */}
                     <motion.div
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ 
-                        delay: 0.2, 
-                        duration: 0.4,
-                        ease: [0.215, 0.61, 0.355, 1]
+                        delay: 0.15, 
+                        duration: 0.3,
                       }}
                       viewport={{ once: true }}
                       className='w-full'
@@ -301,12 +222,11 @@ const ProFirms = () => {
                 {/* Code Display */}
                 <motion.div 
                   className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-6 shadow-md shadow-black/10"
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ 
-                    delay: 0.3, 
-                    duration: 0.4,
-                    ease: [0.215, 0.61, 0.355, 1]
+                    delay: 0.2, 
+                    duration: 0.3,
                   }}
                   viewport={{ once: true }}
                 >
@@ -318,8 +238,8 @@ const ProFirms = () => {
                     <motion.button
                       onClick={() => handleCopyCode(firm.code, firm.name)}
                       className="cursor-pointer bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 shadow-sm shadow-black/10"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       Copy
                     </motion.button>
@@ -329,12 +249,11 @@ const ProFirms = () => {
                 {/* Action Buttons */}
                 <motion.div 
                   className="flex gap-3 group"
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ 
-                    delay: 0.4, 
-                    duration: 0.4,
-                    ease: [0.215, 0.61, 0.355, 1]
+                    delay: 0.25, 
+                    duration: 0.3,
                   }}
                   viewport={{ once: true }}
                 >
@@ -350,10 +269,6 @@ const ProFirms = () => {
                   </motion.button>
                 </motion.div>
               </div>
-
-              {/* Decorative Elements */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full blur-2xl"></div>
             </motion.div>
           ))}
         </motion.div>
@@ -363,4 +278,4 @@ const ProFirms = () => {
   );
 };
 
-export default ProFirms;
+export default React.memo(ProFirms);
